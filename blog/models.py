@@ -16,6 +16,7 @@ class Post(models.Model):
     slug =  models.SlugField(default='', blank=True,
                             null=False, db_index=True, max_length=255)
     content =  models.CharField(max_length=2000)
+    
 
     # class Meta:
     #     verbose_name_plural = 'Posts'
@@ -23,10 +24,16 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title}"
 
-# class Tag(models.Model):
-#     name =  models.CharField(max_length=50)
+class Tag(models.Model):
+    name =  models.CharField(max_length=50)
+    post = models.ManyToManyField(Post)
 
-# class Author(models.Model):
-#     first_name =  models.CharField(max_length=100)
-#     last_name =  models.CharField(max_length=100)
-#     email =  models.EmailField( validators=[models.EmailField(_("email"), max_length=254)])
+    def __str__(self):
+        return f"{self.name}"
+
+
+class Author(models.Model):
+    first_name =  models.CharField(max_length=100)
+    last_name =  models.CharField(max_length=100)
+    email =  models.EmailField(max_length=254)
+    Post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, related_name='author')

@@ -5,10 +5,9 @@ from .models import Post
 all_posts = Post.objects.all()
 
 def starting_page(request):
-    # sorted_posts = sorted(all_posts, key=Post.date)
-    # latest_posts = sorted_posts[-3:]
+    latest_posts = Post.objects.order_by('-date')[:3]
     return render(request, "blog/index.html", {
-        'posts': all_posts
+        'posts': latest_posts
     })
 
 def posts(request):
