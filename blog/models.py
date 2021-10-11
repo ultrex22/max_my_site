@@ -9,13 +9,19 @@ from django.utils.text import slugify
 # Create your models here.
 
 class Post(models.Model):
-    Title =  models.CharField(max_length=100)
-    Excerpt =  models.CharField(max_length=255)
-    Image_Name =  models.CharField(max_length=100)
-    Date =  models.DateField(auto_now=True)
-    Slug =  models.SlugField(default='', blank=True,
+    title =  models.CharField(max_length=100)
+    excerpt =  models.CharField(max_length=255)
+    image_name =  models.CharField(max_length=100)
+    date =  models.DateField(auto_now=True)
+    slug =  models.SlugField(default='', blank=True,
                             null=False, db_index=True, max_length=255)
-    Content =  models.CharField(max_length=100)
+    content =  models.CharField(max_length=2000)
+
+    # class Meta:
+    #     verbose_name_plural = 'Posts'
+
+    def __str__(self):
+        return f"{self.title}"
 
 # class Tag(models.Model):
 #     name =  models.CharField(max_length=50)
