@@ -1,22 +1,20 @@
 from django.db import models
-from django.core import validators
-from django.core.validators import EmailValidator
-from django.db.models.base import Model
-from django.db.models.fields import CharField, DateField, SlugField
+# from django.core import validators
+# from django.core.validators import EmailValidator
+# from django.db.models.base import Model
+# from django.db.models.fields import CharField, DateField, SlugField
 from django.urls import reverse
 from django.utils.text import slugify
 
-# Create your models here.
 
 class Post(models.Model):
-    title =  models.CharField(max_length=100)
-    excerpt =  models.CharField(max_length=255)
-    image_name =  models.CharField(max_length=100)
-    date =  models.DateField(auto_now=True)
-    slug =  models.SlugField(default='', blank=True,
+    title = models.CharField(max_length=100)
+    excerpt = models.CharField(max_length=255)
+    image_name = models.CharField(max_length=100)
+    date = models.DateField(auto_now=True)
+    slug = models.SlugField(default='', blank=True,
                             null=False, db_index=True, max_length=255)
-    content =  models.CharField(max_length=2000)
-    
+    content = models.CharField(max_length=2000)
 
     # class Meta:
     #     verbose_name_plural = 'Posts'
@@ -24,16 +22,21 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title}"
 
+
 class Tag(models.Model):
-    name =  models.CharField(max_length=50)
+    caption = models.CharField(max_length=50)
     post = models.ManyToManyField(Post)
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.caption}"
 
 
 class Author(models.Model):
-    first_name =  models.CharField(max_length=100)
-    last_name =  models.CharField(max_length=100)
-    email =  models.EmailField(max_length=254)
-    Post = models.ForeignKey(Post, on_delete=models.CASCADE, null=True, related_name='author')
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
+    email = models.EmailField(max_length=254)
+    Post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, null=True, related_name='author')
+
+    def __str__(self):
+        return f"{self.last_name}, {self.first_name}"
