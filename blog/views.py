@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from .models import Post
+from .forms import CommentForm
 
 all_posts = Post.objects.all().order_by('-date')
 
@@ -33,7 +34,8 @@ def post_detail(request, slug):
     # id_post = next(post for post in all_posts if post.slug == slug)
     return render(request, 'blog/post-detail.html', {
         'post': id_post,
-        "post_tags": id_post.tag.all()
+        "post_tags": id_post.tag.all(),
+        "comment_form":CommentForm()
     })
 
 
