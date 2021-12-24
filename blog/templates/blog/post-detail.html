@@ -24,7 +24,7 @@
     </div>
     <article>
         <img
-        src="{% static 'blog/images/'|add:post.image_name %}"
+        src="{{ post.image_name.url }}"
         alt="{{ post.title }}"
         />
         <address>

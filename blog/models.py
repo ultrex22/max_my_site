@@ -1,8 +1,4 @@
 from django.db import models
-# from django.core import validators
-# from django.core.validators import EmailValidator
-# from django.db.models.base import Model
-# from django.db.models.fields import CharField, DateField, SlugField
 from django.urls import reverse
 from django.utils.text import slugify
 from django.core.validators import MinLengthValidator
@@ -27,8 +23,8 @@ class Author(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=100)
     excerpt = models.CharField(max_length=255)
-    image_name = models.CharField(max_length=100)  
     date = models.DateField(auto_now=True)
+    image_name = models.ImageField(upload_to='images', null=True)
     slug = models.SlugField(unique=True)
     content = models.TextField(validators=[MinLengthValidator(10)])
     tag = models.ManyToManyField(Tag)
