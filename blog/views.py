@@ -1,20 +1,29 @@
 from django.shortcuts import render, get_object_or_404
+from django.views.generic import TemplateView
+from django.views.generic.list import ListView
 from .models import Post
 
 all_posts = Post.objects.all().order_by('-date')
 
 
-def starting_page(request):
+class StartingPageView(TemplateView):
+    template_name = 'blog/index.html'
     latest_posts = Post.objects.order_by('-date')[:3]
-    return render(request, "blog/index.html", {
-        'posts': latest_posts
-    })
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['posts'] = self.latest_posts
+        return context
 
 
-def posts(request):
-    return render(request, 'blog/all-posts.html', {
-        'all_posts': all_posts
-    })
+class PostsView(ListView):
+    template_name = 'blog/all-posts.html'
+    model = Post
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['all_posts'] = all_posts
+        return context
 
 
 def post_detail(request, slug):
