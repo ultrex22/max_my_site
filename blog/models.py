@@ -1,8 +1,6 @@
+from django.core.validators import MinLengthValidator
 from django.db import models
 from django.db.models.deletion import CASCADE
-from django.urls import reverse
-from django.utils.text import slugify
-from django.core.validators import MinLengthValidator
 
 
 class Tag(models.Model):
@@ -31,6 +29,7 @@ class Post(models.Model):
     tag = models.ManyToManyField(Tag)
     author = models.ForeignKey(
         Author, on_delete=models.SET_NULL, null=True, related_name='posts')
+
 
 class Comment(models.Model):
     user_name = models.CharField(max_length=50)

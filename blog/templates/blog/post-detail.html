@@ -35,7 +35,8 @@
 
 <section id='comment-form'>
     <h2>Your comments</h2>
-    <form  action="">
+    <form  action="" methon='post'>
+        {% csrf_token%}
         <div class='form-control'>
             {% for form_field in comment_form %}
             {{form_field.label_tag }}

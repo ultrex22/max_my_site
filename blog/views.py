@@ -30,12 +30,12 @@ class PostsView(ListView):
 def post_detail(request, slug):
     # this will generate a 404 page if item not found. saves from wrapping in a try block.
     id_post = get_object_or_404(Post, slug=slug)
-    # this was my soultion, copied from somewhere using next()
+    # this was my solution, copied from somewhere using next()
     # id_post = next(post for post in all_posts if post.slug == slug)
     return render(request, 'blog/post-detail.html', {
         'post': id_post,
         "post_tags": id_post.tag.all(),
-        "comment_form":CommentForm()
+        "comment_form": CommentForm()
     })
 
 
