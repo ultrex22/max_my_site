@@ -35,7 +35,7 @@
 
 <section id='comment-form'>
     <h2>Your comments</h2>
-    <form  action="" methon='post'>
+    <form  action="{% url 'post-detail-page' post.slug %}" method='post'>
         {% csrf_token%}
         <div class='form-control'>
             {% for form_field in comment_form %}

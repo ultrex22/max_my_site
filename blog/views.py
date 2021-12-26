@@ -1,8 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 from django.views.generic.list import ListView
-from .models import Post
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
 from .forms import CommentForm
+from .models import Post
 
 all_posts = Post.objects.all().order_by('-date')
 
@@ -27,16 +30,33 @@ class PostsView(ListView):
         return context
 
 
-def post_detail(request, slug):
-    # this will generate a 404 page if item not found. saves from wrapping in a try block.
-    id_post = get_object_or_404(Post, slug=slug)
-    # this was my solution, copied from somewhere using next()
-    # id_post = next(post for post in all_posts if post.slug == slug)
-    return render(request, 'blog/post-detail.html', {
-        'post': id_post,
-        "post_tags": id_post.tag.all(),
-        "comment_form": CommentForm()
-    })
+class SinglePostDetail(View):
+
+    def get(self, request, slug):
+        post = Post.objects.get(slug=slug)
+        context = {
+            "post": post,
+            "post_tags": post.tag.all(),
+            "comment_form": CommentForm()
+        }
+        return render(request, 'blog/post-detail.html', context)
+
+    def post(self, request, slug):
+        comment_form = CommentForm(request.POST)
+        post = Post.objects.get(slug=slug)
+
+        if comment_form.is_valid():
+            comment = comment_form.save(commit=False)
+            comment.post = post
+            comment.save()
+            return HttpResponseRedirect(reverse('post-detail-page', args=[slug]))
+
+        context = {
+            "post": post,
+            "post_tags": post.tags.all(),
+            "comment_form": CommentForm()
+        }
+        return render(request, 'blog/post-detail.html', context)
 
 
 def get_date(post):
