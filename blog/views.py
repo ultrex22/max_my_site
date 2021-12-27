@@ -51,12 +51,14 @@ class SinglePostDetail(View):
             comment.save()
             return HttpResponseRedirect(reverse('post-detail-page', args=[slug]))
 
-        context = {
-            "post": post,
-            "post_tags": post.tags.all(),
-            "comment_form": CommentForm()
-        }
-        return render(request, 'blog/post-detail.html', context)
+        else:
+            print('invalid form data')
+            context = {
+                "post": post,
+                "post_tags": post.tag.all(),
+                "comment_form": comment_form
+            }
+            return render(request, 'blog/post-detail.html', context)
 
 
 def get_date(post):

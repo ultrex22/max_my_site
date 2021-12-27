@@ -15,6 +15,15 @@
 
 
 {% block content %}
+
+{% if comment_form.errors %}
+<div id='alert'>
+    <h2>Saving failed.</h2>
+    <p>Please check and retry.</p>
+    <a href="#comment-form">Fix</a>
+</div>
+{%endif%}
+
 <section id="summary">
     <h2>{{ post.title }}</h2>
     <div>
@@ -35,13 +44,13 @@
 
 <section id='comment-form'>
     <h2>Your comments</h2>
-    <form  action="{% url 'post-detail-page' post.slug %}" method='post'>
+    <form action="{% url 'post-detail-page' post.slug %}" method='post'>
         {% csrf_token%}
-        <div class='form-control'>
+        <div class='form-control' {% if form_field.errors %}invalid{% endif %}>
             {% for form_field in comment_form %}
             {{form_field.label_tag }}
             {{form_field }}
-            {{form_field.error}}
+            {{form_field.errors}}
             {% endfor%}
         </div>
         <button>Save Comment</button>
