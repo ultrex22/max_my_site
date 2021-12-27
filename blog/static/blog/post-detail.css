@@ -114,13 +114,13 @@ main {
   cursor: pointer;
 }
 
-div label:nth-of-type(1) {
+/* .invalid div label:nth-of-type(1) {
   color:#d6000b;
 }
 
-#id_user_name {
+.invalid #id_user_name {
   background-color: #eec5c7;
-}
+} */
 #comment-form button:hover,
 #comment-form button:active {
   background-color: #9e67e6;
