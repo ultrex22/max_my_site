@@ -1,8 +1,12 @@
 from django.conf.urls.static import static
+from django.contrib import admin
 from django.urls import path
 
 from max_my_site import settings
 from . import views
+
+admin.site.site_header = 'Blog Admin - Site Header'
+admin.site.index_title = "Blog - Index Title"
 
 urlpatterns = [
                   # path('', views.starting_page, name='starting-page'),
