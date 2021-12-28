@@ -74,6 +74,28 @@ main {
   border-radius: 8px;
 }
 
+
+
+#read-later {
+  margin: 2rem 0;
+}
+
+#read-later button {
+  background-color: transparent;
+  border: 1px solid white;
+  padding: .5rem 2rem;
+  font: inherit;
+  color: white;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+#read-later button:hover,
+#read-later button:active{
+  background-color: white;
+  color: #390281;
+}
+
 .form-control {
   margin-bottom: 1rem;
 }
@@ -114,13 +136,7 @@ main {
   cursor: pointer;
 }
 
-/* .invalid div label:nth-of-type(1) {
-  color:#d6000b;
-}
 
-.invalid #id_user_name {
-  background-color: #eec5c7;
-} */
 #comment-form button:hover,
 #comment-form button:active {
   background-color: #9e67e6;
