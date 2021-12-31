@@ -74,8 +74,6 @@ main {
   border-radius: 8px;
 }
 
-
-
 #read-later {
   margin: 2rem 0;
 }
@@ -83,7 +81,7 @@ main {
 #read-later button {
   background-color: transparent;
   border: 1px solid white;
-  padding: .5rem 2rem;
+  padding: 0.4rem 2rem;
   font: inherit;
   color: white;
   cursor: pointer;
@@ -91,7 +89,7 @@ main {
 }
 
 #read-later button:hover,
-#read-later button:active{
+#read-later button:active {
   background-color: white;
   color: #390281;
 }
@@ -135,7 +133,6 @@ main {
   border-radius: 8px;
   cursor: pointer;
 }
-
 
 #comment-form button:hover,
 #comment-form button:active {
