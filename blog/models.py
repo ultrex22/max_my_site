@@ -29,9 +29,9 @@ class Post(models.Model):
     tag = models.ManyToManyField(Tag)
     author = models.ForeignKey(
         Author, on_delete=models.SET_NULL, null=True, related_name='posts')
-    
+
     def __str__(self) -> str:
-        return self.title
+        return str(self.title)
 
 
 class Comment(models.Model):

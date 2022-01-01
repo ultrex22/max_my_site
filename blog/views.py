@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.views.generic import TemplateView, View
 from django.views.generic.list import ListView
 from django.http import HttpResponseRedirect
@@ -12,7 +12,7 @@ all_posts = Post.objects.all().order_by('-date')
 
 class StartingPageView(TemplateView):
     template_name = 'blog/index.html'
-    latest_posts = Post.objects.order_by('-date')[:3]
+    latest_posts = Post.objects.order_by('-date')[:4]
 
     def get_context_data(self):
         context = super().get_context_data()
